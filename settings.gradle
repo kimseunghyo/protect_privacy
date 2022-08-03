@@ -1,0 +1,4 @@
+rootProject.name = "dlibModule"
+include ':app'
+include ':openCV'
+include ':dlib'

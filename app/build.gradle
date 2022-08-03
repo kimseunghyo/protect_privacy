@@ -1,0 +1,140 @@
+plugins {
+    id 'com.android.application'
+    id 'de.undercouch.download' // tflite
+
+}
+
+android {
+    compileSdkVersion 31
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.example.dlibmodule"
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true //한나:multidex 사용 설정. firebase와 jcenter(CropImage) 동시 사용하기 위한것...
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_STL=c++_shared", "-DANDROID_TOOLCHAIN=clang"
+                cppFlags "-std=c++11 -fexceptions"
+            }
+        }
+        ndk {
+            abiFilters "arm64-v8a", "x86"
+        }
+    }
+
+//한나:firebase와 jcenter(CropImage) 동시 사용하기 위한것... 중복된 경로로 인한 에러 해결 위한 코드...
+    packagingOptions{
+        exclude 'androidsupportmultidexversion.txt'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main {
+            jni {
+                srcDirs 'src\\main\\jni', 'src\\main\\jnilibs'
+            }
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.process.Precessor'
+        pickFirst 'META-INF/maven/org.btyedeco.javacpp-presets/opencv/pom.properties'
+        pickFirst 'META-INF/maven/org.btyedeco.javacpp-presets/opencv/pom.xml'
+        pickFirst 'META-INF/maven/org.btyedeco.javacpp-presets/ffmpeg/pom.properties'
+        pickFirst 'META-INF/maven/org.btyedeco.javacpp-presets/ffmpeg/pom.xml'
+    }
+
+}
+
+// import DownloadModels task       // tf
+project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
+project.ext.TMP_DIR   = project.buildDir.toString() + '/downloads'
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation project(path: ':openCV')
+    implementation project(path: ':dlib')
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation 'com.google.android.material:material:1.3.0-alpha01'
+
+//glid
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.11.4'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.4'
+
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+// dlib
+    implementation 'com.tzutalin.dlib-android-app:dlib:1.0.4'
+    implementation 'androidx.annotation:annotation:1.0.2'
+
+// 갤러리 카메라
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+
+//한나:firebase sdk 추가
+    implementation platform('com.google.firebase:firebase-bom:28.3.0')
+    implementation platform('com.google.firebase:firebase-bom:28.2.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-database:20.0.1'
+
+//한나:firebase와 jcenter(CropImage) 동시 사용하기 위한것...
+// AndroidX를 사용하는 경우
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+
+
+    implementation 'gun0912.ted:tedpermission:1.0.3' // M + permission
+
+//librestreaming
+    //implementation name: 'librestreaming-debug', ext: 'aar'
+
+    implementation 'com.google.android.gms:play-services-vision:15.0.1'
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.google.android.gms:play-services-places:15.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+
+    // added MLKit dependencies for face detector   // tf
+    implementation 'com.google.mlkit:face-detection:16.1.2'
+
+    // tflite
+    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+    implementation('org.tensorflow:tensorflow-lite:2.0.0')// { changing = true }
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.google.truth:truth:1.0.1'
+}
+
+//한나:firebase sdk 추가
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
