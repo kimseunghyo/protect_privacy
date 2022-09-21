@@ -12,5 +12,5 @@
 ### 3. 구성도
 ![image](https://user-images.githubusercontent.com/99049141/191550883-2192299d-df28-4205-b41d-d1ce247e1c5c.png)
 
-### 4. UI
+### 4. 
 ![ui](https://user-images.githubusercontent.com/99049141/191555154-aa6c73d3-a4dc-43f9-bce1-ddfca5474eea.png)
