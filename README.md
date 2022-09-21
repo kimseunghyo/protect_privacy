@@ -11,6 +11,8 @@
 
 ### 3. 구성도
 ![구성도](/uploads/2b66f579ffe87ddd30df7cbfb769b306/구성도.jpg)
+![image](https://user-images.githubusercontent.com/99049141/191550883-2192299d-df28-4205-b41d-d1ce247e1c5c.png)
+
 
 ### 4. UI
 ![ui](/uploads/838ca25f6819b0f47f9bc7bb4b3a3cec/ui.PNG)
