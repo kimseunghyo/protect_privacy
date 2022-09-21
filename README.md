@@ -12,12 +12,5 @@
 ### 3. 구성도
 ![image](https://user-images.githubusercontent.com/99049141/191550883-2192299d-df28-4205-b41d-d1ce247e1c5c.png)
 
-
 ### 4. UI
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2e1cb10c-0359-4fed-b49f-6ecd9e399805/Untitled.png)
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/aabbe976-8290-4882-9708-452780c3b801/Untitled.png)
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/89570102-8185-4431-9be2-c89f9c202536/Untitled.png)
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dab61abf-882f-49d8-9713-94a33e11f8d3/Untitled.png)
+![ui](https://user-images.githubusercontent.com/99049141/191555154-aa6c73d3-a4dc-43f9-bce1-ddfca5474eea.png)
